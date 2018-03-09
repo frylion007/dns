@@ -1,0 +1,28 @@
+options {
+    listen-on port  53 { any; };
+    listen-on port 5353 { any; };
+    directory "/usr/local/named";
+    dump-file "./var/named_dump.db";
+    memstatistics-file "./var/named.memstats";
+    pid-file "./var/named.pid";
+    statistics-file  "./var/named.stats";
+    allow-query-cache       { none; }; 
+    allow-recursion         { none; };
+    allow-transfer          { none; };
+    #allow-query             { any; };
+    rrset-order             { order random; };
+    zone-statistics         yes;
+    allow-new-zones         yes;
+    recursive-clients       1000000;
+    transfers-out           10000000;
+    transfers-in            10000000;
+    transfers-per-ns       10000000;
+    tcp-clients             1000000;
+    tcp-listen-queue        1000000;
+    serial-query-rate       1000000;
+    notify                  yes;
+    also-notify { 10.7.56.202; };
+    recursion no;
+    auth-nxdomain    no;
+    version     "company name";
+};

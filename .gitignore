@@ -1,0 +1,6 @@
+bin/
+sbin/
+var/
+lib/
+include/
+share/

@@ -1,0 +1,23 @@
+acl OFFICE {
+    192.168.42.0/24;
+};
+
+acl JINHUA_OLD {
+    10.3.5.0/24;
+};
+
+acl JINHUA_NEW {
+    10.7.56.0/21;
+};
+
+acl YIDONG2 {
+    10.6.24.0/24;
+};
+
+acl SLAVE_IPS {
+    10.7.56.202/32;
+};
+
+acl MASTER_IPS {
+    10.7.56.201/32;
+};

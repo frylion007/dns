@@ -1,0 +1,87 @@
+view "OFFICE" {
+        match-clients           {  key OFFICE-key; key OFFICE-update-key; !MASTER_IPS; !SLAVE_IPS; OFFICE; };
+
+        # info to 10.7.56.202 with OFFICE-key TSIG
+        server 10.7.56.202   { keys OFFICE-key; };
+        
+        #permit OFFICE-key TSIG info transfer or copy zone
+        allow-transfer          { key OFFICE-key; };
+
+        # permit ddns
+        allow-update            { key OFFICE-update-key; };
+
+        include "./views/root.zone";
+        include "./views/OFFICE.view";
+};
+
+view "JINHUA_NEW" {
+        match-clients           {  key JINHUA_NEW-key; key JINHUA_NEW-update-key; !MASTER_IPS; !SLAVE_IPS; JINHUA_NEW; };
+
+	# info to 10.7.56.202 with OFFICE-key TSIG
+        # slave 
+        server 10.7.56.202   { keys JINHUA_NEW-key; };
+
+        #permit OFFICE-key TSIG info transfer or copy zone
+        allow-transfer          { key JINHUA_NEW-key; };
+
+        # permit ddns
+        allow-update            { key JINHUA_NEW-update-key; };
+
+
+        include "./views/root.zone";
+        include "./views/JINHUA_NEW.view";
+};
+
+view "JINHUA_OLD" {
+        match-clients           {  key JINHUA_OLD-key; key JINHUA_OLD-update-key; !MASTER_IPS; !SLAVE_IPS; JINHUA_OLD; };
+
+	# info to 10.7.56.202 with OFFICE-key TSIG
+        # slave
+        server 10.7.56.202   { keys JINHUA_OLD-key; };
+
+        #permit OFFICE-key TSIG info transfer or copy zone
+        allow-transfer          { key JINHUA_OLD-key; };
+
+        # permit ddns
+        allow-update            { key JINHUA_OLD-update-key; };
+
+
+        include "./views/root.zone";
+        include "./views/JINHUA_OLD.view";
+};
+
+view "YIDONG2" {
+        match-clients           {  key YIDONG2-key; key YIDONG2-update-key; !MASTER_IPS; !SLAVE_IPS; YIDONG2; };
+
+        # info to 10.7.56.202 with OFFICE-key TSIG
+	#slave server
+        server 10.7.56.202   { keys YIDONG2-key; };
+
+        #permit OFFICE-key TSIG info transfer or copy zone
+        allow-transfer          { key YIDONG2-key; };
+
+        # permit ddns
+        allow-update            { key YIDONG2-update-key; };
+
+
+        include "./views/root.zone";
+        include "./views/YIDONG2.view";
+};
+
+view "DEFAULT" {
+        match-clients           {  key DEFAULT-key; key DEFAULT-update-key; !MASTER_IPS; !SLAVE_IPS; any; };
+
+	# info to 10.7.56.202 with OFFICE-key TSIG
+        #slave server
+        server 10.7.56.202   { keys DEFAULT-key; };
+
+        #permit OFFICE-key TSIG info transfer or copy zone
+        allow-transfer          { key DEFAULT-key; };
+
+        # permit ddns
+        allow-update            { key DEFAULT-update-key; };
+
+
+        include "./views/root.zone";
+        include "./views/DEFAULT.view";
+};
