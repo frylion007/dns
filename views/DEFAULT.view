@@ -3,3 +3,8 @@ zone "frylion.com" IN {
         file "zones/frylion.com-DEFAULT.zone";
 };
 
+zone "d41d8cd98f00b204e9800998ecf8427e.frylion.com" IN {
+        type master;
+        file "zones/d41d8cd98f00b204e9800998ecf8427e.frylion.com-DEFAULT.zone";
+};
+

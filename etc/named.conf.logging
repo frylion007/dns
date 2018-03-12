@@ -28,7 +28,7 @@ logging {
                 default_update;
         };
 
-        category queries {
+        category queries  {
                 default_debug;
         };
 
