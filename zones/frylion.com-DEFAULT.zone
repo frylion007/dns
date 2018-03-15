@@ -1,8 +1,13 @@
-$TTL 1
-@               IN  SOA     ns1.frylion.com. nib.youzu.com.( 2017022802 3H 15M 1W 1D )
-@               IN  NS      ns1.frylion.com.
-ns1             IN A        10.7.56.202 
-www             IN  A       192.168.42.222
-bbs             IN  CNAME   www.frylion.com.
-ftp             IN  CNAME   www.frylion.com.
-linux           IN  CNAME   www.frylion.com.
+$TTL 3600
+@          IN SOA  ns1.frylion.com. frylion.163.com. (
+                                2001513650 ; serial
+                                3600       ; refresh (1 hour)
+                                600        ; retry (10 minutes)
+                                2419200    ; expire (4 weeks)
+                                600        ; minimum (10 minutes)
+                                )
+@                        IN NS      ns1.frylion.com.
+@                        IN NS      ns2.frylion.com.
+ns1			   IN A       10.7.56.202
+ns2			   IN A       10.7.56.203
+

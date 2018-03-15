@@ -1,0 +1,22 @@
+#add dynamic zone
+bash add_zone.sh -Z huihui.com -T master -V DEFAULT
+/usr/local/named/sbin/rndc -s 127.0.0.1 -p 953 -k /usr/local/named/etc/rndc.key reconfig 
+# add dynamic zone in slave dns
+scp -P57522 add_zone.sh root@10.7.56.202:/tmp
+ssh -p57522 root@10.7.56.202 "bash /tmp/add_zone.sh -Z huihui.com -T slave -S 10.7.56.201 -V DEFAULT"
+ssh -p57522 root@10.7.56.202 "/usr/local/named/sbin/rndc -s 127.0.0.1 -p 953 -k /usr/local/named/etc/rndc.key reconfig"
+########################################################################################
+#generate key
+vim generate_key.sh -> alter suffix -> bash generate_key.sh YIDONG2 JINHUA_OLD OFFICE ...VIEW 
+#########################################################################################
+#add dynamic record 
+bash nsupdate.sh -s 10.7.56.201 -k JINHUA_NEW-update-key -v ZQPpKtYipTKwMypuu91MYw== -o add -t 3600  -S www.frylion.com -T A -D 192.168.42.200
+
+#del dynamic record
+bash nsupdate.sh -s 10.7.56.201 -k JINHUA_NEW-update-key -v ZQPpKtYipTKwMypuu91MYw== -o delete -S www.frylion.com -T A -D 192.168.42.200
+#######################################################################################
+#FAQ
+当nsupdate.sh新解析的时候出现response to SOA query was unsuccessful的错误,说明这个域名所对应的zone在view中没有.需要view中添加相应的zone才能添加该域名解析
+例:
+bash nsupdate.sh -s 10.7.56.201 -k JINHUA_NEW-update-key -v ZQPpKtYipTKwMypuu91MYw== -o add -t 3600  -S www.frylion.com -T A -D 192.168.42.200报response to SOA query was unsuccessful
+说明 frylion.com这个zone在JINHUA_NEW view中没有所以www.frylion.com这个域名不能在这个view中添加
